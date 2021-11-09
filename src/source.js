@@ -8,8 +8,6 @@ import * as UI from './UI'
 
 console.log("😃✔️👍")
 
-
-
 // DRAG & DROP
 const dropArea = document.getElementById('drop-area');
 
@@ -60,51 +58,52 @@ reader.addEventListener('load', async (e) => {
 		UI.showErrorMessage(Error("file is not an image"), "Cannot load this file")
 		return ;
 	}
-
-	// Decode the NZCP QR-code and process it
-	//UI.scanner.hidden = true
-	let rawstring = null;
+		
+	
+	// Decode the DCC QR-code and process it
+	//UI.scanner.hidden = true	
+	let rawstring = null; 
 	try {
 		rawstring = await decodeQR(file)
 		console.log(rawstring)
-
-		// Decode the NZCP and display its content
+		
+		// Decode the DGC and display its content
 		loadNZCPFromString(rawstring)
 		.catch(err => {
-			UI.showErrorMessage(err,"This is not an NZ COVID Pass")
+			UI.showErrorMessage(err,"This is not an EU Digital COVID Certificate")
 		});
 	}
 	catch(err) {
 		UI.hideQRCanvas();
 		UI.showErrorMessage(err, "This file doesn't contain a valid QR-code")
 	}
-
+	
 });
 
 async function loadNZCPFromString(rawstring) {
 	UI.showDecodedText(rawstring)
-
+	
 	// Load QR Preview
 	const canvas = UI.getQRCanvas()
 	beautifyQR(rawstring, canvas)
 	UI.showQRCanvas();
 
-	// Load the NZCP
-	UI.setProgressText("Decoding NZ COVID Pass")
-	if (!rawstring) throw Error("Invalid NZCP: "+rawstring)
+	// Load the DCC
+	UI.setProgressText("Decoding Green Certificate")
+	if (!rawstring) throw Error("Invalid DGC: "+rawstring)
 	let nzcp = new NZCovidPass(rawstring);
 
 	let rawnzcp = nzcp.getRawCwt()
 	let kid = nzcp.getKid()
 	let algid = nzcp.getSignAlgorithm()
-
+	
 	// Display the Certificate content)
 	// raw content
 	UI.displayRawText(nzcp.getEncodedString())
 	UI.displayRawHCERT(nzcp.toRawString())
 	// parsed content
-	const vcNZCP = nzcp.withDecodedValues()
-	UI.displayDecodedVC(vcNZCP);
+	const hrnzcp = nzcp.withDecodedValues()
+	UI.displayDecodedHCERT(hrnzcp);
 
 	// Signature Verification!
 	UI.setProgressText("Verifying signature")
@@ -112,24 +111,22 @@ async function loadNZCPFromString(rawstring) {
 	.then(isAuthentic => {
 		UI.displaySignatureResult(isAuthentic);
 	})
+	UI.displaySignatureDetails(kid, algid);
 
-	// Signature/Cert details
-	signature.getIdentityFromKID(kid, algid)
-	.then(cert => {
-		UI.displaySignatureDetails(kid, algid);
-		if (cert) {
-			let subject = `${cert.subject.commonName} (${cert.subject.countryName})`;
-			let issuer = `${cert.issuer.commonName} (${cert.issuer.countryName})`;
-			UI.displaySigner(`${subject}, issued by ${issuer}`)
-		}
-		else {
-			UI.displaySigner(`unknown`)
-		}
-	})
-	
+//	// Signature/Cert details - Not required as we just have a public key
+//	signature.getIdentityFromKID(kid, algid)
+//	.then(cert => {
+//		UI.displaySignatureDetails(kid, algid);
+//		if (cert) {
+//			let subject = `${cert.subject.commonName} (${cert.subject.countryName})`;
+//			let issuer = `${cert.issuer.commonName} (${cert.issuer.countryName})`;
+//			UI.displaySigner(`${subject}, issued by ${issuer}`)
+//		}
+//		else {
+//			UI.displaySigner(`unknown`)
+//		}
+//	})
 }
-
-
 
 // QR SCANNER
 QrScanner.WORKER_PATH = 'qr-scanner-worker.min.js';
@@ -137,12 +134,12 @@ const qrScanner = new QrScanner(UI.scannerVideo, rawstring => {
 	qrScanner.stop();
 	navigator.vibrate(200);
 	UI.scanner.hidden = true;
-
-	// Decode the NZCP and display its content
+	
+	// Decode the nzcp and display its content
 	console.log(rawstring)
 	loadNZCPFromString(rawstring)
 	.catch(err => {
-		UI.showErrorMessage(err,"This is not an NZ COVID Pass")
+		UI.showErrorMessage(err,"This is not an EU Digital COVID Certificate")
 		UI.hideQRCanvas()
 	});
 });

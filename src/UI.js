@@ -19,7 +19,7 @@ export function reset() {
 	document.getElementById("test-group").hidden = true;
 
 	signatureDetails.hidden = true;
-	document.getElementById("cert-co").innerText = "unavailable"
+//	document.getElementById("cert-co").innerText = "unavailable"
 	document.getElementById("kid").innerText = "";
 	document.getElementById("alg").innerText = ""
 
@@ -108,70 +108,71 @@ export function showDecodedHCertGroup(type) {
 
 	const cert_type = document.getElementById("cert-type")
 
-    switch(type) {
-        case("v"):
+    // **TODO Need to update here too for the mappings.
+//    switch(type) {
+//        case("vc"):
             vgroup.hidden = false;
-            cert_type.innerText = "Vaccination"
-            break;
-        case("r"):
-            rgroup.hidden = false;
-            cert_type.innerText = "Recovery"
-            break;
-        case("t"):
-            tgroup.hidden = false;
-            cert_type.innerText = "Test"
-            break;
-        default:
-            throw Error("invalid certificate type")
-            break;
-    }
+            cert_type.innerText = "NZ Covid Pass"
+//            break;
+//        case("r"):
+//            rgroup.hidden = false;
+//            cert_type.innerText = "Recovery"
+//            break;
+//        case("t"):
+//            tgroup.hidden = false;
+//            cert_type.innerText = "Test"
+//            break;
+//        default:
+//            throw Error("invalid certificate type")
+//            break;
+//    }
 
 	document.getElementById("common-group").hidden = false;
 	document.getElementById("person-group").hidden = false;
 
 }
 
-
-
 //
-// Fills the UI with human readable values
+// Fills the UI with human readable values 
 // of the dgc fields
 //
-export function displayDecodedVC(covidpassJSON) {
+export function displayDecodedHCERT(greenpassJSON) {
 
+    // **TODO And here too for the mappings.
 	// Enable the necessary UI sections
 	let type = null;
-	if ("v" in covidpassJSON) {
-		type = "v"
-	}
-	else if ("r" in covidpassJSON) {
-		type = "r"
-	}
-	else if ("t" in covidpassJSON) {
-		type = "t"
-	}
-	else throw Error("invalid certificate type");
+//	if ("vc" in greenpassJSON) {
+		type = "vc"
+//	}
+//	else if ("r" in greenpassJSON) {
+//		type = "r"
+//	}
+//	else if ("t" in greenpassJSON) {
+//		type = "t"
+//	}
+//	else throw Error("invalid certificate type");
 	showDecodedHCertGroup(type)
+	
 
 	// Fill the UI
 
 	// Display the top-level properties(dob, ver)
-	document.getElementById("dob").value = covidpassJSON.dob.value
-	document.getElementById("ver").innerText = covidpassJSON.ver.value
+//	document.getElementById("dob").value = greenpassJSON.dob.value
+//	document.getElementById("ver").innerText = greenpassJSON.ver.value
 
 	// Display the person's name group properties
-	for (let p of Object.keys(covidpassJSON.nam)) {
-		const textbox = document.getElementById(p);
-		textbox.value = covidpassJSON.nam[p].value
-	}
-
-	// Display the type specific group properties
-	// v | r | t
-	const type_group = covidpassJSON[type][0]
-	for (let p of Object.keys(type_group)) {
-		const textbox = document.getElementById(type+"-"+p);
-		textbox.value = type_group[p].value
-	}
+//	for (let p of Object.keys(greenpassJSON.nam)) {
+//		const textbox = document.getElementById(p);
+//		textbox.value = greenpassJSON.nam[p].value
+//	}
+//
+//	// Display the type specific group properties
+//	// v | r | t
+//	const type_group = greenpassJSON[type][0]
+//	for (let p of Object.keys(type_group)) {
+//		const textbox = document.getElementById(type+"-"+p);
+//		textbox.value = type_group[p].value
+//	}
 
 }
 
@@ -244,9 +245,9 @@ export function displaySignatureDetails(kid, alg) {
 	document.getElementById("alg").innerText = (alg_decoder[alg]) ? alg_decoder[alg] : alg;
 }
 
-export function displaySigner(str) {
-	document.getElementById("cert-co").innerText = str
-}
+//export function displaySigner(str) {
+//	document.getElementById("cert-co").innerText = str
+//}
 
 
 export const scannerVideo = document.getElementById("camera-stream")

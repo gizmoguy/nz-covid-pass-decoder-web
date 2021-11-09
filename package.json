@@ -1,7 +1,7 @@
 {
-  "name": "dgc-green-pass-decoder",
-  "version": "1.0.0",
-  "description": "A simple web app to read what's inside the Green Pass QR-code.",
+  "name": "nz-config-pass-decoder",
+  "version": "0.0.1",
+  "description": "A simple web app to read what's inside the NZ Covid Pass QR-code forked from DCC Green Pass Decoder ",
   "dependencies": {
     "@babel/runtime": "^7.15.4",
     "@faustbrian/node-base32": "^1.0.0",
