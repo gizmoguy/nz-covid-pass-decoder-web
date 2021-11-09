@@ -84,7 +84,7 @@ signatureDetailsToggle.addEventListener("click", event => {
 // ERROR BAR
 
 export function showErrorMessage(err,err_header) {
-	console.warn("NOT A DGC: "+err)
+	console.warn("NOT A NZCP: "+err)
 	// Show error message
 	const errtext = err_header+"\n"+err;
 	document.querySelector("#dgc-json").textContent = errtext;
@@ -134,41 +134,40 @@ export function showDecodedHCertGroup(type) {
 
 
 //
-// Fills the UI with human readable values 
+// Fills the UI with human readable values
 // of the dgc fields
 //
-export function displayDecodedHCERT(greenpassJSON) {
+export function displayDecodedVC(covidpassJSON) {
 
 	// Enable the necessary UI sections
 	let type = null;
-	if ("v" in greenpassJSON) {
+	if ("v" in covidpassJSON) {
 		type = "v"
 	}
-	else if ("r" in greenpassJSON) {
+	else if ("r" in covidpassJSON) {
 		type = "r"
 	}
-	else if ("t" in greenpassJSON) {
+	else if ("t" in covidpassJSON) {
 		type = "t"
 	}
 	else throw Error("invalid certificate type");
 	showDecodedHCertGroup(type)
-	
 
 	// Fill the UI
 
 	// Display the top-level properties(dob, ver)
-	document.getElementById("dob").value = greenpassJSON.dob.value
-	document.getElementById("ver").innerText = greenpassJSON.ver.value
+	document.getElementById("dob").value = covidpassJSON.dob.value
+	document.getElementById("ver").innerText = covidpassJSON.ver.value
 
 	// Display the person's name group properties
-	for (let p of Object.keys(greenpassJSON.nam)) {
+	for (let p of Object.keys(covidpassJSON.nam)) {
 		const textbox = document.getElementById(p);
-		textbox.value = greenpassJSON.nam[p].value
+		textbox.value = covidpassJSON.nam[p].value
 	}
 
 	// Display the type specific group properties
 	// v | r | t
-	const type_group = greenpassJSON[type][0]
+	const type_group = covidpassJSON[type][0]
 	for (let p of Object.keys(type_group)) {
 		const textbox = document.getElementById(type+"-"+p);
 		textbox.value = type_group[p].value
