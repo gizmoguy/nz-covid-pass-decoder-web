@@ -16,26 +16,26 @@
     <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
     <link rel="shortcut icon" href="favicon.png" type="image/x-png">
     <link rel="icon" href="favicon.png" type="image/x-png">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-switch@2.0.0/dist/css/bulma-switch.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="bundle.js" defer></script>
 
-    <title>Digital COVID Certificate decoder</title>
+    <title>NZ COVID Pass decoder</title>
 
 </head>
 <body id="drop-area">
     <div class="main">
         <div class="section">
             <div class="container title is-unselectable">
-                <h1 class="title">EU Digital COVID Certificate decoder</h1>
+                <h1 class="title">NZ COVID Pass decoder</h1>
             </div>
             <div class="container block is-unselectable">
                 <div class="notification is-info is-light">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="container pt-5">
                 <div class="columns is-variable is-6">
                     <div class="column is-unselectable">
@@ -61,7 +61,7 @@
                                         </div>
                                         <div>
                                             <p>
-                                                Drag & Drop a QR code on this box  
+                                                Drag &amp; Drop a QR code on this box
                                             </p>
                                         </div>
                                     </div>
@@ -72,12 +72,12 @@
                                 </div>
                                 <div class="block canvas-wrapper is-hidden">
                                     <canvas id="qr-canvas"  height=300 width=300>
-                                        This browser doesn't support HTML5 Canvas. 
-                                        This app might not work properly without the canvas API. 
+                                        This browser doesn't support HTML5 Canvas.
+                                        This app might not work properly without the canvas API.
                                         Please switch to a supported browser
                                     </canvas>
                                 </div>
-                                
+
                                 <div class="content has-text-centered mt-3">
                                     <div class="container mb-2 is-hidden-desktop">
                                         <div class="button is-info is-large" id="start-scan">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="container block mb-6">
                             <span class="label is-size-4">Options</span>
                             <div class="container">
@@ -160,7 +160,6 @@
                         </div>
                     </div>
 
-                    
                     <div class="column is-two-thirds" id="results-col">
                         <div id="dgc-code" hidden>
                             <div class="container mb-5">
@@ -176,7 +175,7 @@
                             <span class="label is-size-4">Certificate content</span>
                             <div class="notification is-warning is-light mb-6" id="error-bar" hidden>
                                 <div class="mb-2">
-                                    <strong>⚠️ This is not an EU Digital COVID Certificate</strong>
+                                    <strong>⚠️ This is not a NZ COVID Pass</strong>
                                 </div>
                                 <div class="container">
                                     <div class="content">
@@ -207,7 +206,6 @@
                                     </p>
                                 </div>
                             </div>
-                            
 
                             <div id="signature-verified-notification" class="notification is-success is-light mb-5" hidden>
                                 <div class="mb-2">
@@ -326,11 +324,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="field">
                                     <span class="label">Date of vaccination</span>
                                     <input type="text" id="v-dt" class="dgc vaccine input" placeholder="e.g 2021-05-18" readonly>
-                                </div>                                            
+                                </div>
                                 <div class="field">
                                     <span class="label">Vaccine or prophilaxis</span>
                                     <input type="text" id="v-vp" class="dgc vaccine input" placeholder="e.g SARS-CoV-2 mRNA vaccine" readonly>
@@ -355,7 +353,7 @@
                                     <span class="label">Certificate Issuer</span>
                                     <input type="text" id="v-is" class="dgc vaccine input" placeholder="e.g Ministero della Salute" readonly>
                                 </div>
-                                
+
                             </div>
 
                             <div class="mt-6"  id="test-group" hidden>
@@ -378,7 +376,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="field">
                                     <span class="label">RAT Test name and manufacturer</span>
                                     <input type="text" id="t-ma" class="dgc test input" placeholder="(none)" readonly>
@@ -470,25 +468,23 @@
                 <div class="notification-body">
                     <div class="content">
                         <p>
-                            This is <u>not an official validation tool</u> but a simple viewer of what is inside the QR code of the European Digital Covid Certificate. 
+                            This is <u>not an official validation tool</u> but a simple viewer of what is inside the QR code of the European Digital Covid Certificate.
                             If you need to check the validity of a certificate, use the official app provided by the authorities of your country.
                         </p>
                         <p>
-                            For Italy, the official Digital Green Certificate verification app is VerificaC19. 
-                            You can read more about it and download it from the 
+                            For Italy, the official Digital Green Certificate verification app is VerificaC19.
+                            You can read more about it and download it from the
                             <a href="https://www.dgc.gov.it/web/app.html">
-                                <span>official government site</span> 
+                                <span>official government site</span>
                                 <span><i class="fas fa-external-link-alt"></i></i></span>
                             </a>
                         </p>
                     </div>
-    
                 </div>
             </div>
         </div>
     </div>
     <div class="section">
-        
     </div>
         <footer class="footer is-unselectable has-text-centered has-background-info-light is-hidden-touch">
         <div class="content">
