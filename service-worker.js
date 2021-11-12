@@ -28,7 +28,7 @@ const filesToCache = [
     'style.css',
     'bundle.js',
     'index.html',
-    "assets/it_dgc_public_keys.json",
+    "assets/nzcp_public_keys.json",
     "assets/icons/icon-128x128.png",
     "assets/icons/icon-152x152.png",
     "assets/icons/icon-384x384.png",

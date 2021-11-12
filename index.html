@@ -16,26 +16,26 @@
     <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
     <link rel="shortcut icon" href="favicon.png" type="image/x-png">
     <link rel="icon" href="favicon.png" type="image/x-png">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-switch@2.0.0/dist/css/bulma-switch.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="bundle.js" defer></script>
 
-    <title>Digital COVID Certificate decoder</title>
+    <title>NZ COVID Pass decoder</title>
 
 </head>
 <body id="drop-area">
     <div class="main">
         <div class="section">
             <div class="container title is-unselectable">
-                <h1 class="title">EU Digital COVID Certificate decoder</h1>
+                <h1 class="title">NZ COVID Pass decoder</h1>
             </div>
             <div class="container block is-unselectable">
                 <div class="notification is-info is-light">
@@ -43,11 +43,11 @@
                         <strong>🕵️‍♀️ Privacy</strong>
                     </div>
                     <div class="block">
-                        This app works entirely on your device and doesn't upload your data anywhere. You can always <a href="https://github.com/floysh/DCC-green-pass-decoder">check the source code</a> if you don't trust me 🙂
+                        This app works entirely on your device and doesn't upload your data anywhere. You can always <a href="https://github.com/nz-covid-pass/web-nz-covid-pass-decoder">check the source code</a> if you don't trust me 🙂
                     </div>
                 </div>
             </div>
-        
+
             <div class="container pt-5">
                 <div class="columns is-variable is-6">
                     <div class="column is-unselectable">
@@ -61,7 +61,7 @@
                                         </div>
                                         <div>
                                             <p>
-                                                Drag & Drop a QR code on this box  
+                                                Drag &amp; Drop a QR code on this box
                                             </p>
                                         </div>
                                     </div>
@@ -72,12 +72,12 @@
                                 </div>
                                 <div class="block canvas-wrapper is-hidden">
                                     <canvas id="qr-canvas"  height=300 width=300>
-                                        This browser doesn't support HTML5 Canvas. 
-                                        This app might not work properly without the canvas API. 
+                                        This browser doesn't support HTML5 Canvas.
+                                        This app might not work properly without the canvas API.
                                         Please switch to a supported browser
                                     </canvas>
                                 </div>
-                                
+
                                 <div class="content has-text-centered mt-3">
                                     <div class="container mb-2 is-hidden-desktop">
                                         <div class="button is-info is-large" id="start-scan">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="container block mb-6">
                             <span class="label is-size-4">Options</span>
                             <div class="container">
@@ -121,13 +121,13 @@
                                         <div class="columns is-mobile is-vcentered">
                                             <div class="column">
                                                 <span class="has-text-weight-semibold pr-3">
-                                                    <label for="dgcHumanReadableToggle" class="mr-2">Human Readable</label>
+                                                    <label for="nzcpHumanReadableToggle" class="mr-2">Human Readable</label>
                                                 </span>
                                             </div>
                                             <div class="column is-narrow has-text-right">
                                                 <span class="field">
-                                                    <input id="dgcHumanReadableToggle" type="checkbox" class="switch is-rounded" checked>
-                                                    <label for="dgcHumanReadableToggle"></label>
+                                                    <input id="nzcpHumanReadableToggle" type="checkbox" class="switch is-rounded" checked>
+                                                    <label for="nzcpHumanReadableToggle"></label>
                                                 </span>
                                             </div>
                                         </div>
@@ -160,23 +160,22 @@
                         </div>
                     </div>
 
-                    
                     <div class="column is-two-thirds" id="results-col">
-                        <div id="dgc-code" hidden>
+                        <div id="nzcp-code" hidden>
                             <div class="container mb-5">
                                 <span class="label is-size-4">Encoded raw certificate</span>
-                                <pre id="dgc-raw"></pre>
+                                <pre id="nzcp-raw"></pre>
                             </div>
                             <div class="container mb-5">
                                 <span class="label is-size-4">Raw certificate</span>
-                                <pre class="cert-panel"><code id="dgc-json"></code></pre>
+                                <pre class="cert-panel"><code id="nzcp-json"></code></pre>
                             </div>
                         </div>
-                        <div id="dgc-hr" hidden>
+                        <div id="nzcp-hr" hidden>
                             <span class="label is-size-4">Certificate content</span>
                             <div class="notification is-warning is-light mb-6" id="error-bar" hidden>
                                 <div class="mb-2">
-                                    <strong>⚠️ This is not an EU Digital COVID Certificate</strong>
+                                    <strong>⚠️ This is not a NZ COVID Pass</strong>
                                 </div>
                                 <div class="container">
                                     <div class="content">
@@ -207,7 +206,6 @@
                                     </p>
                                 </div>
                             </div>
-                            
 
                             <div id="signature-verified-notification" class="notification is-success is-light mb-5" hidden>
                                 <div class="mb-2">
@@ -247,10 +245,10 @@
                                         <code id="kid" class="i-size-6 has-text-black"></code>
                                     </span>
                                 </div>
-                                <div class="mt-3">
+                                <!-- <div class="mt-3">
                                     <span class=" is-size-6 mr-2">Signer identity: </span>
                                     <span id="cert-co" class="is-size-6"></span>
-                                </div>
+                                </div> -->
                                 <!-- <div class="mt-3">
                                     <span class=" is-size-6 mr-2">Public key (PEM, base64): </span>
                                     <pre id="pubkey-pem" class="is-size-6"></pre>
@@ -268,192 +266,44 @@
                                             <span class=" is-size-6 mr-2">Schema version: </span>
                                             <span id="ver" class="is-size-6"></span>
                                         </div>
+                                        <div class="mt-3">
+                                            <span class=" is-size-6 mr-2">Issuer: </span>
+                                            <span id="iss" class="is-size-6"></span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <span class="label">Not Valid Before</span>
+                                        <input type="text" id="nbf" class="nzcp input" readonly>
+                                    </div>
+                                    <div class="field">
+                                        <span class="label">Expiry</span>
+                                        <input type="text" id="exp" class="nzcp input" readonly>
+                                    </div>
+                                    <div class="field">
+                                        <span class="label">Unique Identifier</span>
+                                        <input type="text" id="jti" class="nzcp input" readonly>
                                     </div>
                                 </div>
                                 <div id="person-group">
                                     <div class="columns">
                                         <div class="column">
                                             <div class="field">
-                                                <span class="label">Surame(s)</span>
-                                                <input type="text" id="fn" class="dgc input" placeholder="e.g Rossi" readonly>
+                                                <span class="label">Given Name</span>
+                                                <input type="text" id="givenName" class="nzcp input" placeholder="e.g Marco Aurelio" readonly>
                                             </div>
                                             <div class="field">
-                                                <span class="label">Name(s)</span>
-                                                <input type="text" id="gn" class="dgc input" placeholder="e.g Marco Aurelio" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="column">
-                                            <div class="field">
-                                                <span class="label">Standardized surame(s)</span>
-                                                <input type="text" id="fnt" class="dgc input" placeholder="e.g ROSSI" readonly>
-                                            </div>
-                                            <div class="field">
-                                                <span class="label">Standardized name(s)</span>
-                                                <input type="text" id="gnt" class="dgc input" placeholder="e.g MARCO>AURELIO" readonly>
+                                                <span class="label">Family Name</span>
+                                                <input type="text" id="familyName" class="nzcp input" placeholder="e.g Rossi" readonly>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <span class="label">Date of birth</span>
-                                        <input type="text" id="dob" class="dgc input" placeholder="e.g 1987-06-12" readonly>
+                                        <input type="text" id="dob" class="nzcp input" placeholder="e.g 1987-06-12" readonly>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="mt-6" id="vaccination-group" hidden>
-                                <div class="field">
-                                    <span class="label">Unique Certificate Identifier (UVCI) </span>
-                                    <input type="text" id="v-ci" class="dgc input" placeholder="e.g 01ITE7300E1AB2A84C719004F103DCB1F70A#6" readonly>
-                                </div>
-                                <div class="columns is-mobile is-gapless is-vcentered is-align-items-end">
-                                    <div class="column">
-                                        <div class="field">
-                                            <span class="label">Dose number</span>
-                                            <input type="text" id="v-dn" class="dgc vaccine input" placeholder="e.g 1/2" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="column is-narrow">
-                                        <div class="field">
-                                            <span class="label">&nbsp</span>
-                                            <button class="button has-text-large" disabled style="border-style: none;"> / </button>
-                                        </div>
-                                    </div>
-                                    <div class="column">
-                                        <div class="field">
-                                            <span class="label">Total series of doses</span>
-                                            <input type="text" id="v-sd" class="dgc vaccine input" placeholder="e.g 1/2" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="field">
-                                    <span class="label">Date of vaccination</span>
-                                    <input type="text" id="v-dt" class="dgc vaccine input" placeholder="e.g 2021-05-18" readonly>
-                                </div>                                            
-                                <div class="field">
-                                    <span class="label">Vaccine or prophilaxis</span>
-                                    <input type="text" id="v-vp" class="dgc vaccine input" placeholder="e.g SARS-CoV-2 mRNA vaccine" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Vaccine medicinal product</span>
-                                    <input type="text" id="v-mp" class="dgc vaccine input" placeholder="e.g Comirnaty" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Vaccine manufacturer or Marketing Authorization Holder</span>
-                                    <input type="text" id="v-ma" class="dgc vaccine input" placeholder="e.g Biontech Manufacturing GmbH" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Disease or Agent Targeted</span>
-                                    <input type="text" id="v-tg" class="dgc vaccine input" placeholder="e.g COVID-19" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Country of vaccination</span>
-                                    <input type="text" id="v-co" class="dgc vaccine input" placeholder="e.g Italy" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Certificate Issuer</span>
-                                    <input type="text" id="v-is" class="dgc vaccine input" placeholder="e.g Ministero della Salute" readonly>
-                                </div>
-                                
-                            </div>
-
-                            <div class="mt-6"  id="test-group" hidden>
-                                <div class="field">
-                                    <span class="label">Unique Certificate Identifier (UVCI) </span>
-                                    <input type="text" id="t-ci" class="dgc test input" placeholder="e.g 01ITE7300E1AB2A84C719004F103DCB1F70A#6" readonly>
-                                </div>
-
-                                <div class="columns">
-                                    <div class="column">
-                                        <div class="field">
-                                            <span class="label">Sample Collected at</span>
-                                            <input type="text" id="t-sc" class="dgc test input" placeholder="e.g May 3, 2021, 12:27:15 PM GMT+2" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="column">
-                                        <div class="field">
-                                            <span class="label">Date of result</span>
-                                            <input type="text" id="t-dr" class="dgc test input" placeholder="e.g May 11, 2021, 2:27:15 PM GMT+2" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="field">
-                                    <span class="label">RAT Test name and manufacturer</span>
-                                    <input type="text" id="t-ma" class="dgc test input" placeholder="(none)" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Test Type</span>
-                                    <input type="text" id="t-tt" class="dgc test input" placeholder="e.g Nucleic acid amplification with probe detection" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">NAA Test Name</span>
-                                    <input type="text" id="t-nm" class="dgc test input" placeholder="e.g Roche LightCycler qPCR" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Country of test</span>
-                                    <input type="text" id="t-co" class="dgc test input" placeholder="e.g Italy" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Testing centre</span>
-                                    <input type="text" id="t-tc" class="dgc test input" placeholder="e.g Policlinico Umberto I" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Certificate issuer</span>
-                                    <input type="text" id="t-is" class="dgc test input" placeholder="e.g Ministero della Salute" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Disease or agent targeted</span>
-                                    <input type="text" id="t-tg" class="dgc test input" placeholder="e.g COVID-19" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Test result</span>
-                                    <input type="text" id="t-tr" class="dgc test input" placeholder="e.g Not detected" readonly>
-                                </div>
-                            </div>
-
-
-                            <div class="mt-6" id="recovery-group" hidden>
-                                <div class="field">
-                                    <span class="label">Unique Certificate Identifier (UVCI) </span>
-                                    <input type="text" id="r-ci" class="dgc recovery input" placeholder="e.g 01ITE7300E1AB2A84C719004F103DCB1F70A#6" readonly>
-                                </div>
-                                <div class="columns">
-                                    <div class="column">
-                                        <div class="field">
-                                            <span class="label">Certificate valid from</span>
-                                            <input type="text" id="r-df" class="dgc recovery input" placeholder="e.g 2021-04-05" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="column">
-                                        <div class="field">
-                                            <span class="label">Certificate valid until</span>
-                                            <input type="text" id="r-du" class="dgc recovery input" placeholder="e.g 2021-10-31" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Country</span>
-                                    <input type="text" id="r-co" class="dgc recovery input" placeholder="e.g Austria" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Certificate issuer</span>
-                                    <input type="text" id="r-is" class="dgc recovery input" placeholder="e.g Ministerio de la Sanidad" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Disease or agent targeted</span>
-                                    <input type="text" id="r-tg" class="dgc recovery input" placeholder="e.g COVID-19" readonly>
-                                </div>
-                                <div class="field">
-                                    <span class="label">Date of First positive NAA test result</span>
-                                    <input type="text" id="r-fr" class="dgc recovery input" placeholder="e.g 2021-04-03" readonly>
-                                </div>
-                            </div>
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -470,25 +320,15 @@
                 <div class="notification-body">
                     <div class="content">
                         <p>
-                            This is <u>not an official validation tool</u> but a simple viewer of what is inside the QR code of the European Digital Covid Certificate. 
+                            This is <u>not an official validation tool</u> but a simple viewer of what is inside the QR code of the NZ COVID Pass.
                             If you need to check the validity of a certificate, use the official app provided by the authorities of your country.
                         </p>
-                        <p>
-                            For Italy, the official Digital Green Certificate verification app is VerificaC19. 
-                            You can read more about it and download it from the 
-                            <a href="https://www.dgc.gov.it/web/app.html">
-                                <span>official government site</span> 
-                                <span><i class="fas fa-external-link-alt"></i></i></span>
-                            </a>
-                        </p>
                     </div>
-    
                 </div>
             </div>
         </div>
     </div>
     <div class="section">
-        
     </div>
         <footer class="footer is-unselectable has-text-centered has-background-info-light is-hidden-touch">
         <div class="content">
@@ -497,6 +337,7 @@
             </div>
             <div>
                 Made with ❤️ in Italy
+                And some updates from 🇳🇿
             </div>
         </div>
         <div class="content">
@@ -507,13 +348,13 @@
                 <i class="fab fa-github"></i>
             </span>
             <span>
-                <a href="https://github.com/floysh/DCC-green-pass-decoder">Github</a>
+                <a href="https://github.com/nz-covid-pass/web-nz-covid-pass-decoder">Github</a>
             </span>
         </div>
     </footer>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js', {scope: '/DCC-green-pass-decoder/'})
+            navigator.serviceWorker.register('service-worker.js', {scope: '/web-nz-covid-pass-decoder/'})
             .then(function(registration) {
                 console.log('Registration successful, scope is:', registration.scope);
             })
